@@ -4,13 +4,46 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
-<meta name="description" content="Amtliche Flurstücke in Rheinland-Pfalz finden, markieren und teilen. Mit gut lesbaren Flurstücksnummern und persönlichen Notizen.">
-<title>Flurstück-Finder | Nur Rheinland-Pfalz – Suchen, Markieren und Teilen</title>
+<meta name="description" content="FlurFinder Rheinland-Pfalz: Flurstücke auf der kostenlosen Flurkarte suchen, Grundstücksgrenzen ansehen, Flurstücksnummern finden, markieren und teilen.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://moritzglantz.de/flurfinder/">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://moritzglantz.de/flurfinder/">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="FlurFinder Rheinland-Pfalz">
+<meta property="og:title" content="FlurFinder Rheinland-Pfalz – Flurstücke suchen & markieren">
+<meta property="og:description" content="Kostenlose Flurkarte für Rheinland-Pfalz: Flurstücke und Grundstücksgrenzen finden, auf der Karte markieren, Notizen ergänzen und per Link teilen.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FlurFinder Rheinland-Pfalz – Flurstücke suchen & markieren">
+<meta name="twitter:description" content="Flurstücke in Rheinland-Pfalz finden, markieren und teilen – mit amtlichen Katasterdaten.">
+<title>FlurFinder Rheinland-Pfalz – Flurstücke suchen & markieren</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "FlurFinder Rheinland-Pfalz",
+  "url": "https://moritzglantz.de/flurfinder/",
+  "description": "Kostenloses Kartenwerkzeug zum Suchen, Markieren und Teilen von Flurstücken und Grundstücksgrenzen in Rheinland-Pfalz.",
+  "inLanguage": "de-DE",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Webbrowser",
+  "isAccessibleForFree": true,
+  "areaServed": {"@type": "AdministrativeArea", "name": "Rheinland-Pfalz, Deutschland"},
+  "featureList": ["Flurstückssuche", "Ortssuche", "Flurstücksnummern und Grundstücksgrenzen", "Auswahl mehrerer Flurstücke", "Persönliche Notizen", "Teilbare Kartenlinks", "Karten- und Luftbildansicht", "PDF-Druck"]
+}
+</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5.9.0/dist/maplibre-gl.css">
 <style>
-:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#152e42;background:#f7f9fc;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:#165986}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #ffb72f;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.55}.app{height:100dvh;display:grid;grid-template-rows:65px minmax(0,1fr)}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;background:white;border-bottom:1px solid #dfe7ee;padding:10px 22px}.brand{display:flex;align-items:center;gap:11px;min-width:0}.logo{width:38px;height:38px;border-radius:11px;background:#0d6057;color:white;display:grid;place-items:center;font-size:22px;font-weight:800}.brand strong{display:block;letter-spacing:-.035em;font-size:19px}.brand small{display:block;color:#667b8a;font-size:11px}.top-actions{display:flex;align-items:center;gap:8px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #cbd7e1;color:#214357;background:#fff;border-radius:10px;min-height:39px;padding:9px 13px;font-size:13px;font-weight:670;white-space:nowrap}.btn:hover{background:#eef4f7}.btn.primary{background:#0e6258;border-color:#0e6258;color:white}.btn.primary:hover{background:#094a43}.btn.ghost{border:0;background:transparent;padding:6px 8px}.content{display:grid;grid-template-columns:minmax(0,1fr) 365px;min-height:0}.map-area{position:relative;min-width:0;background:#dce5e9}.map{position:absolute;inset:0}.maplibregl-map{font:inherit}.maplibregl-ctrl-bottom-left{max-width:70%}.maplibregl-ctrl-attrib{font-size:10px!important}.map-panel{position:absolute;z-index:3;left:16px;top:16px;display:flex;flex-wrap:wrap;gap:9px;pointer-events:none;max-width:calc(100% - 32px)}.map-panel>*{pointer-events:auto}.map-switch{display:flex;background:white;border:1px solid #dce4ec;padding:4px;border-radius:11px;box-shadow:0 3px 15px #17385221;gap:2px}.map-switch button{border:0;border-radius:7px;padding:9px 13px;font-size:12px;background:transparent;color:#375366;font-weight:700}.map-switch button[aria-pressed=true]{background:#e4f2ee;color:#0a5e50}.map-check{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:11px;border:1px solid #dce4ec;background:#fff;box-shadow:0 3px 15px #17385218;font-size:12px;font-weight:650}.map-check[hidden]{display:none!important}.map-check input{accent-color:#0d6559;width:17px;height:17px}.map-notice{position:absolute;z-index:3;bottom:32px;left:16px;max-width:min(580px,calc(100% - 32px));border:1px solid #d9e4eb;border-radius:11px;background:#fffffff0;color:#39586c;box-shadow:0 3px 15px #17385218;padding:10px 13px;font-size:12px;line-height:1.5}.map-notice[data-tone=error]{background:#fff3eb;color:#924414;border-color:#ecc5a9}.map-notice[data-tone=success]{background:#eef8f1;color:#285a43;border-color:#cbe6d3}.sidebar{min-height:0;overflow-y:auto;background:white;border-left:1px solid #dbe3eb;padding:19px;display:flex;flex-direction:column;gap:22px}.section{display:grid;gap:10px}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}.section h2{font-size:15px;letter-spacing:-.016em;margin:0}.eyebrow{font-size:11px;color:#70869a;text-transform:uppercase;font-weight:800;letter-spacing:.09em}.field{display:grid;gap:5px}.field label,.field>span{font-size:12px;font-weight:690;color:#3f596b}.field input,.field select,.field textarea{background:#fff;border:1px solid #cbd6e0;border-radius:8px;padding:9px 10px;min-height:39px;color:#152e42;width:100%;font-size:13px}.field textarea{resize:vertical;min-height:78px;line-height:1.5}.row{display:flex;align-items:center;gap:8px}.row>*{min-width:0}.row .grow{flex:1}.tiny{font-size:12px;line-height:1.5;color:#63788a}.muted{color:#738699}.search-result,.parcel-item{border:1px solid #dfe7ed;border-radius:10px;padding:10px 11px;background:white;display:flex;gap:10px;align-items:center;justify-content:space-between}.search-result .text{min-width:0;flex:1}.search-result strong,.parcel-item strong{font-size:13px;display:block}.search-result small,.parcel-item small{font-size:11px;color:#65788a;display:block;line-height:1.5}.results,.selected{display:grid;gap:7px;max-height:230px;overflow-y:auto}.empty{border:1px dashed #d4e0e8;border-radius:10px;padding:17px 12px;text-align:center;font-size:12px;color:#788c9b;line-height:1.5}.counter{font-size:11px;color:#115f52;font-weight:780;background:#e9f4f1;border-radius:999px;padding:4px 9px}.dot{display:inline-block;flex:none;width:12px;height:12px;border-radius:50%;background:#f59b23;border:2px solid #fff;box-shadow:0 0 0 1px #b5c6cd}.parcel-item{padding:9px 10px}.parcel-item .name{flex:1;min-width:0}.xbtn{border:0;background:transparent;border-radius:8px;min-width:29px;min-height:31px;font-size:20px;color:#647b8a}.xbtn:hover{background:#f3e6e2;color:#9d4f34}.pill{font-size:11px;background:#f1f5f8;color:#4c6576;padding:3px 7px;border-radius:7px}.rule{height:1px;background:#e6edf2}.help{font-size:11px;color:#667a87;line-height:1.55}.detail{background:#f7fafb;border:1px solid #e0e9ed;border-radius:10px;padding:12px;display:grid;gap:10px}.detail[hidden]{display:none}.credit{font-size:10px;line-height:1.5;color:#788999;margin-top:auto;padding-top:12px}.credit a{color:inherit}.print-sheet{display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#152e42;background:#f7f9fc;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:#165986}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #ffb72f;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.55}.app{height:100dvh;display:grid;grid-template-rows:65px minmax(0,1fr)}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;background:white;border-bottom:1px solid #dfe7ee;padding:10px 22px}.brand{display:flex;align-items:center;gap:11px;min-width:0}.logo{width:38px;height:38px;border-radius:11px;background:#0d6057;color:white;display:grid;place-items:center;font-size:22px;font-weight:800}.brand h1{display:block;letter-spacing:-.035em;font-size:19px;line-height:1.1;margin:0;font-weight:750}.brand small{display:block;color:#667b8a;font-size:11px}.top-actions{display:flex;align-items:center;gap:8px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #cbd7e1;color:#214357;background:#fff;border-radius:10px;min-height:39px;padding:9px 13px;font-size:13px;font-weight:670;white-space:nowrap}.btn:hover{background:#eef4f7}.btn.primary{background:#0e6258;border-color:#0e6258;color:white}.btn.primary:hover{background:#094a43}.btn.ghost{border:0;background:transparent;padding:6px 8px}.content{display:grid;grid-template-columns:minmax(0,1fr) 365px;min-height:0}.map-area{position:relative;min-width:0;background:#dce5e9}.map{position:absolute;inset:0}.maplibregl-map{font:inherit}.maplibregl-ctrl-bottom-left{max-width:70%}.maplibregl-ctrl-attrib{font-size:10px!important}.map-panel{position:absolute;z-index:3;left:16px;top:16px;display:flex;flex-wrap:wrap;gap:9px;pointer-events:none;max-width:calc(100% - 32px)}.map-panel>*{pointer-events:auto}.map-switch{display:flex;background:white;border:1px solid #dce4ec;padding:4px;border-radius:11px;box-shadow:0 3px 15px #17385221;gap:2px}.map-switch button{border:0;border-radius:7px;padding:9px 13px;font-size:12px;background:transparent;color:#375366;font-weight:700}.map-switch button[aria-pressed=true]{background:#e4f2ee;color:#0a5e50}.map-check{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:11px;border:1px solid #dce4ec;background:#fff;box-shadow:0 3px 15px #17385218;font-size:12px;font-weight:650}.map-check[hidden]{display:none!important}.map-check input{accent-color:#0d6559;width:17px;height:17px}.map-notice{position:absolute;z-index:3;bottom:32px;left:16px;max-width:min(580px,calc(100% - 32px));border:1px solid #d9e4eb;border-radius:11px;background:#fffffff0;color:#39586c;box-shadow:0 3px 15px #17385218;padding:10px 13px;font-size:12px;line-height:1.5}.map-notice[data-tone=error]{background:#fff3eb;color:#924414;border-color:#ecc5a9}.map-notice[data-tone=success]{background:#eef8f1;color:#285a43;border-color:#cbe6d3}.sidebar{min-height:0;overflow-y:auto;background:white;border-left:1px solid #dbe3eb;padding:19px;display:flex;flex-direction:column;gap:22px}.section{display:grid;gap:10px}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}.section h2{font-size:15px;letter-spacing:-.016em;margin:0}.eyebrow{font-size:11px;color:#70869a;text-transform:uppercase;font-weight:800;letter-spacing:.09em}.field{display:grid;gap:5px}.field label,.field>span{font-size:12px;font-weight:690;color:#3f596b}.field input,.field select,.field textarea{background:#fff;border:1px solid #cbd6e0;border-radius:8px;padding:9px 10px;min-height:39px;color:#152e42;width:100%;font-size:13px}.field textarea{resize:vertical;min-height:78px;line-height:1.5}.row{display:flex;align-items:center;gap:8px}.row>*{min-width:0}.row .grow{flex:1}.tiny{font-size:12px;line-height:1.5;color:#63788a}.muted{color:#738699}.search-result,.parcel-item{border:1px solid #dfe7ed;border-radius:10px;padding:10px 11px;background:white;display:flex;gap:10px;align-items:center;justify-content:space-between}.search-result .text{min-width:0;flex:1}.search-result strong,.parcel-item strong{font-size:13px;display:block}.search-result small,.parcel-item small{font-size:11px;color:#65788a;display:block;line-height:1.5}.results,.selected{display:grid;gap:7px;max-height:230px;overflow-y:auto}.empty{border:1px dashed #d4e0e8;border-radius:10px;padding:17px 12px;text-align:center;font-size:12px;color:#788c9b;line-height:1.5}.counter{font-size:11px;color:#115f52;font-weight:780;background:#e9f4f1;border-radius:999px;padding:4px 9px}.dot{display:inline-block;flex:none;width:12px;height:12px;border-radius:50%;background:#f59b23;border:2px solid #fff;box-shadow:0 0 0 1px #b5c6cd}.parcel-item{padding:9px 10px}.parcel-item .name{flex:1;min-width:0}
+.parcel-jump{display:block;text-align:left;border:0;border-radius:7px;background:transparent;color:inherit;padding:7px 6px;cursor:pointer}
+.parcel-jump:hover{background:#eaf4f2;color:#0d6255}
+.parcel-jump:focus-visible{outline:3px solid #ffb72f;outline-offset:2px}
+.parcel-jump:disabled{color:#758796;cursor:default}.xbtn{border:0;background:transparent;border-radius:8px;min-width:29px;min-height:31px;font-size:20px;color:#647b8a}.xbtn:hover{background:#f3e6e2;color:#9d4f34}.pill{font-size:11px;background:#f1f5f8;color:#4c6576;padding:3px 7px;border-radius:7px}.rule{height:1px;background:#e6edf2}.help{font-size:11px;color:#667a87;line-height:1.55}.detail{background:#f7fafb;border:1px solid #e0e9ed;border-radius:10px;padding:12px;display:grid;gap:10px}.detail[hidden]{display:none}.credit{font-size:10px;line-height:1.5;color:#788999;margin-top:auto;padding-top:12px}.credit a{color:inherit}.print-sheet{display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-.region-badge{margin-right:auto;white-space:nowrap;border:1px solid #a7d6c8;background:#e9f7f2;color:#14594d;font-size:12px;font-weight:800;border-radius:999px;padding:8px 12px}
+
 .region-warning{position:absolute;z-index:4;top:78px;left:16px;max-width:min(460px,calc(100% - 32px));border:1px solid #e9bd9d;background:#fff6ed;color:#853e11;box-shadow:0 4px 20px #17385222;border-radius:11px;padding:13px 16px;font-size:14px;font-weight:680;line-height:1.5}
 .region-warning[hidden]{display:none!important}
 .accordion{display:block;border:1px solid #dfe7ed;border-radius:11px;overflow:clip;gap:0}
@@ -23,17 +56,23 @@
 .accordion .accordion-title{flex:1}
 .accordion-body{padding:14px 12px;display:grid;gap:10px}
 .accordion .accordion-body .section{gap:10px}
-@media(max-width:720px){.region-badge{font-size:11px;padding:7px 8px}.region-warning{left:9px;top:66px;max-width:calc(100% - 18px)}}
-@media(max-width:940px){.content{grid-template-columns:minmax(0,1fr) 320px}.sidebar{padding:14px}}@media(max-width:500px){.region-badge{white-space:normal;font-size:10px;max-width:88px;text-align:center;line-height:1.2}.brand{gap:7px}.logo{width:30px;height:30px}.brand strong{font-size:15px}.brand small{display:none}.top-actions .btn.primary{padding:8px 10px;font-size:12px}}
-@media(max-width:720px){.app{display:block;height:auto;min-height:100dvh}.top{padding:10px 13px}.brand strong{font-size:17px}.brand small{font-size:10px}.top-actions .btn:not(.primary){display:none}.content{display:flex;flex-direction:column}.map-area{height:55svh;min-height:350px}.sidebar{border-left:0;border-top:1px solid #e0e7ed;overflow:visible;padding:16px;gap:17px}.map-panel{top:9px;left:9px;gap:6px}.map-notice{bottom:22px;left:9px;font-size:11px}.map-switch button{padding:7px 9px}}@page{size:A4 landscape;margin:10mm}
-@media print{html,body{width:auto;height:auto;background:#fff!important;margin:0!important;padding:0!important} .app{display:none!important}.print-sheet{display:block!important;max-width:100%;font-family:system-ui,sans-serif;color:#193044}.print-sheet h1{font-size:17pt;line-height:1.2;margin:0 0 3mm}.print-sheet p{margin:2mm 0;font-size:9pt;line-height:1.4}.print-sheet img{display:block;width:auto;height:auto;max-width:100%;max-height:158mm;object-fit:contain;border:1px solid #c5d2db;print-color-adjust:exact;-webkit-print-color-adjust:exact}.print-credit{font-size:7.5pt!important;color:#4b6475}}
+@media(max-width:720px){.region-warning{left:9px;top:66px;max-width:calc(100% - 18px)}}
+@media(max-width:940px){.content{grid-template-columns:minmax(0,1fr) 320px}.sidebar{padding:14px}}@media(max-width:500px){.brand{gap:7px}.logo{width:30px;height:30px}.brand h1{font-size:15px}.brand small{display:none}.top-actions .btn.primary{padding:8px 10px;font-size:12px}}
+@media(max-width:720px){.app{display:block;height:auto;min-height:100dvh}.top{padding:10px 13px}.brand h1{font-size:17px}.brand small{font-size:10px}.top-actions .btn:not(.primary){display:none}.content{display:flex;flex-direction:column}.map-area{height:55svh;min-height:350px}.sidebar{border-left:0;border-top:1px solid #e0e7ed;overflow:visible;padding:16px;gap:17px}.map-panel{top:9px;left:9px;gap:6px}.map-notice{bottom:22px;left:9px;font-size:11px}.map-switch button{padding:7px 9px}}@page{size:A4 landscape;margin:10mm}
+@media print{html,body{width:auto;height:auto;background:#fff!important;margin:0!important;padding:0!important} .app{display:none!important}.print-sheet{display:block!important;max-width:100%;font-family:system-ui,sans-serif;color:#193044}.print-sheet h2{font-size:17pt;line-height:1.2;margin:0 0 3mm}.print-sheet p{margin:2mm 0;font-size:9pt;line-height:1.4}.print-sheet img{display:block;width:auto;height:auto;max-width:100%;max-height:158mm;object-fit:contain;border:1px solid #c5d2db;print-color-adjust:exact;-webkit-print-color-adjust:exact}.print-credit{font-size:7.5pt!important;color:#4b6475}}
+.brand h1{max-width:320px}
+.project-links{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;padding:0 0 3px;font-size:12px}
+.project-links a{color:#165986;text-decoration:underline;text-underline-offset:3px;font-weight:650}
+.project-links a:hover{text-decoration-thickness:2px}
+.app-intro{margin:0;font-size:12px;line-height:1.55;color:#526b7d}
+@media(max-width:500px){.top{flex-wrap:wrap;row-gap:7px}.brand{flex:1 1 150px}.brand h1{font-size:15px}.top-actions{margin-left:auto}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top">
-  <div class="brand"><div class="logo" aria-hidden="true">⌗</div><div><strong>Flurstück-Finder</strong><small>Amtliche Katasterdaten und eigene Markierungen</small></div></div>
-  <span class="region-badge" aria-label="Derzeit nur Rheinland-Pfalz verfügbar">Nur Rheinland-Pfalz</span><div class="top-actions"><button class="btn" id="print" type="button">Drucken / PDF</button><button class="btn primary" type="button" id="share">Link kopieren</button></div>
+  <div class="brand"><div class="logo" aria-hidden="true">⌗</div><div><h1>FlurFinder Rheinland-Pfalz</h1><small>Flurstücke suchen, markieren und teilen</small></div></div>
+  <div class="top-actions"><button class="btn" id="print" type="button">Drucken / PDF</button><button class="btn primary" type="button" id="share">Link kopieren</button></div>
 </header>
 <main class="content">
   <section class="map-area" aria-label="Interaktive Karte mit Flurstücksauswahl"><div id="map" class="map" aria-label="Karte; Flurstücke durch Anklicken auswählen"></div>
@@ -47,12 +86,13 @@
     <div class="map-notice" id="map-status" role="status" aria-live="polite">Zoome in die Karte, um Flurstücke anzuzeigen.</div>
   </section>
   <aside class="sidebar" aria-label="Flurstücke suchen und bearbeiten">
+    <p class="app-intro">Kostenlose Flurkarte für Rheinland-Pfalz: Suche nach Ort, Adresse oder Flurstücksnummer und markiere mehrere Grundstücke direkt auf der Karte.</p>
     <section class="section" aria-labelledby="place-title"><div class="section-head"><h2 id="place-title">Ort oder Adresse suchen</h2></div><form id="place-form" class="row"><label class="field grow"><span class="visually-hidden" style="position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden">Ort oder Adresse</span><input id="place-input" type="search" autocomplete="street-address" placeholder="z. B. Koblenz, Löhrstraße" required maxlength="120"></label><button class="btn primary" type="submit">Suchen</button></form><div id="place-results" class="results" role="region" aria-live="polite"></div></section>
     <div class="rule"></div>
     <details class="section accordion" id="parcel-accordion"><summary id="parcel-title"><span class="accordion-title">Flurstück suchen</span></summary><div class="accordion-body"><form id="parcel-form" class="section"><label class="field"><span>Gemarkung</span><input type="text" id="gemarkung" placeholder="z. B. Koblenz" autocomplete="off" required maxlength="90"></label><div class="row"><label class="field grow"><span>Flur</span><input type="number" inputmode="numeric" id="flur" min="0" max="9999" placeholder="z. B. 7 (Pfalz: 0)"></label><label class="field grow"><span>Flurstücksnummer</span><input type="text" id="nummer" inputmode="text" placeholder="z. B. 72/3" required maxlength="16" pattern="[0-9]+(/[0-9]+)?" title="Zähler oder Zähler/Nenner"></label></div><button class="btn" type="submit" id="parcel-submit">Flurstück finden</button><div id="parcel-results" class="results" role="region" aria-live="polite"></div></form><p class="help" style="margin:0">In der Pfalz gilt häufig Flur 0.</p></div></details>
     <div class="rule"></div>
     <details class="section accordion" id="selection-accordion"><summary id="selection-title"><span class="accordion-title">Ausgewählte Flurstücke</span><span class="counter" id="selected-count" aria-live="polite">0 ausgewählt</span></summary><div class="accordion-body">
-      <p class="tiny" style="margin:0">Flurstück anklicken, um es zu markieren. Ein weiterer Klick hebt die Auswahl auf.</p>
+      <p class="tiny" style="margin:0">Flurstücke auf der Karte auswählen. In der Liste einen Eintrag anklicken, um ihn auf der Karte anzuzeigen.</p>
       <div class="selected" id="selection-list" aria-label="Markierte Flurstücke"></div>
       <section id="details" class="detail" hidden aria-label="Notiz zum Flurstück">
         <div class="section-head"><strong id="detail-heading"></strong><button type="button" class="xbtn" id="close-detail" aria-label="Notiz schließen">×</button></div>
@@ -64,12 +104,16 @@
     </details>
     <div class="rule"></div>
     <details class="section accordion" id="data-accordion"><summary><span class="accordion-title">Datenstatus</span><span class="pill" id="data-count">0 geladen</span></summary><div class="accordion-body"><div class="row"><button type="button" class="btn" id="reload">Flurstücke aktualisieren</button></div><div id="api-info" class="tiny" aria-live="polite"></div></div></details>
+    <nav class="project-links" aria-label="Projektlinks">
+      <a href="https://github.com/MoritzGlantz/FlurFinder" target="_blank" rel="noopener noreferrer">GitHub-Repository ↗</a>
+      <a href="https://moritzglantz.de/projects/" target="_blank" rel="noopener noreferrer">Weitere Projekte ↗</a>
+    </nav>
     <div class="credit">Verfügbar ausschließlich für Rheinland-Pfalz. ©GeoBasis-DE / LVermGeoRP 2026, <a href="https://www.govdata.de/dl-de/by-2-0" target="_blank" rel="noopener noreferrer">dl-de/by-2-0</a>, <a href="https://lvermgeo.rlp.de/" target="_blank" rel="noopener noreferrer">www.lvermgeo.rlp.de</a> [Daten bearbeitet].<br>Grundkarte: © GeoBasis-DE / BKG, basemap.de. Luftbilder: © GeoBasis-DE / LVermGeoRP (DOP20). Geokodierung: © OpenStreetMap-Mitwirkende / <a href="https://github.com/komoot/photon" target="_blank" rel="noopener noreferrer">Photon</a>. Die Katasterdarstellung ist eine unverbindliche Information und ersetzt keinen amtlichen Auszug.</div>
   </aside>
 </main>
 </div>
 <section class="print-sheet" id="print-sheet" aria-label="Kartenansicht für den Druck">
-  <h1>Flurstück-Finder · Rheinland-Pfalz</h1>
+  <h2>FlurFinder Rheinland-Pfalz</h2>
   <p id="print-subtitle">Aktueller Kartenausschnitt</p>
   <img id="print-image" alt="Kartenausschnitt mit Flurstücksgrenzen und ausgewählten Flurstücken">
   <p id="print-selected"></p>
@@ -101,30 +145,87 @@
  function encode(x){const bytes=new TextEncoder().encode(JSON.stringify(x));let s='';for(const b of bytes)s+=String.fromCharCode(b);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
  function decode(s){const bin=atob(s.replace(/-/g,'+').replace(/_/g,'/'));return JSON.parse(new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0))))}
  function pickAnchor(f){const geom=f?.geometry;const coords=geom?.type==='Polygon'?geom.coordinates?.[0]:geom?.type==='MultiPolygon'?geom.coordinates?.[0]?.[0]:null;const pt=coords?.[0];return Array.isArray(pt)&&pt.length>=2&&Number.isFinite(pt[0])&&Number.isFinite(pt[1])?[pt[0],pt[1]]:null;}
+ // Full records stay in the browser; shared links contain only IDs, a compact position hint, and optional notes.
  function getState(){return {v:2,selected:[...selection].map(([id,v])=>({id,note:v.note||'',name:v.name||'',center:v.center||null,anchor:v.anchor||null,area:v.area??null}))};}
+ const decodePoint=val=>Array.isArray(val)&&val.length===2&&Number.isFinite(val[0])&&Number.isFinite(val[1])&&val[0]>=5&&val[0]<=10&&val[1]>=48&&val[1]<=52?val:null;
+ const fallbackName=id=>{
+   if(!/^\d{18}[_\d]{2}$/.test(id))return `Flurstück ${id}`;
+   const flur=Number(id.slice(6,9)),zaehler=Number(id.slice(9,14)),nenner=Number(id.slice(14,18));
+   return `${zaehler}${nenner?'/'+nenner:''} · Flur ${flur}`;
+ };
  function validateState(state){
    if(!state||![1,2].includes(state.v)||!Array.isArray(state.selected))throw Error('Ungültige Auswahl');
-   selection.clear();
+   const next=new Map();
    for(const v of state.selected.slice(0,250)){
      if(!validId(v.id))continue;
-     const location=val=>Array.isArray(val)&&val.length===2&&Number.isFinite(val[0])&&Number.isFinite(val[1])&&val[0]>=5&&val[0]<=10&&val[1]>=48&&val[1]<=52?val:null;
-     selection.set(v.id,{note:sanitize(v.note).slice(0,400),name:sanitize(v.name).slice(0,150)||v.id,center:location(v.center),anchor:location(v.anchor)||location(v.center),area:Number.isFinite(v.area)?v.area:null});
+     next.set(v.id,{note:sanitize(v.note).slice(0,400),name:sanitize(v.name).slice(0,150)||fallbackName(v.id),center:decodePoint(v.center),anchor:decodePoint(v.anchor)||decodePoint(v.center),area:Number.isFinite(v.area)?v.area:null});
    }
+   selection=next;
  }
- function restore(){const params=new URL(location.href).searchParams;const fromURL=params.get('s');let candidate=null;
-   try{if(fromURL){candidate=decode(fromURL)}else{const stored=localStorage.getItem('flst-finder-v2');if(stored)candidate=JSON.parse(stored)}if(candidate)validateState(candidate)}catch(e){console.warn('Die Auswahl konnte nicht geladen werden',e)}
+ // Each position uses six bytes: longitude/latitude in microdegrees relative to 5° E / 48° N.
+ // Positions are optional and serve only as a fallback for locating a parcel before its geometry arrives.
+ const rawBase64=bytes=>{let b='';for(const value of bytes)b+=String.fromCharCode(value);return btoa(b).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');};
+ const fromRawBase64=text=>Uint8Array.from(atob(text.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0));
+ function compactPositions(ids){
+   const packed=new Uint8Array(ids.length*6);let any=false;
+   ids.forEach((id,i)=>{
+     const item=selection.get(id),point=decodePoint(item?.anchor)||decodePoint(item?.center);
+     if(!point)return;
+     const coords=[Math.round((point[0]-5)*1e6),Math.round((point[1]-48)*1e6)];
+     if(coords.some(n=>n<=0||n>=16777216))return;
+     any=true;
+     coords.forEach((n,j)=>{const o=i*6+j*3;packed[o]=(n>>>16)&255;packed[o+1]=(n>>>8)&255;packed[o+2]=n&255;});
+   });
+   return any?rawBase64(packed):'';
+ }
+ function unpackPositions(text,count){
+   if(!text)return [];
+   const bytes=fromRawBase64(text);
+   if(bytes.length!==count*6)throw Error('Ungültige Positionsdaten');
+   return Array.from({length:count},(_,i)=>{
+     const read=j=>{const o=i*6+j*3;return (bytes[o]<<16)|(bytes[o+1]<<8)|bytes[o+2];};
+     const a=read(0),b=read(1);
+     return a&&b?decodePoint([5+a/1e6,48+b/1e6]):null;
+   });
+ }
+ function restoreCompact(params){
+   const ids=[...new Set((params.get('flst')||'').split(',').filter(validId))].slice(0,250);
+   let positions=[];try{positions=unpackPositions(params.get('p'),ids.length)}catch(e){console.warn('Positionsdaten nicht lesbar',e)}
+   let notes=[];try{const raw=params.get('n');if(raw){const decoded=decode(raw);if(Array.isArray(decoded))notes=decoded}}catch(e){console.warn('Notizen nicht lesbar',e)}
+   const next=new Map();
+   ids.forEach((id,i)=>{const point=positions[i]||null;next.set(id,{note:'',name:fallbackName(id),center:point,anchor:point,area:null});});
+   for(const [index,value] of notes.slice(0,250)){
+     if(Number.isInteger(index)&&index>=0&&index<ids.length&&typeof value==='string')next.get(ids[index]).note=value.slice(0,400);
+   }
+   selection=next;
+ }
+ function restoreSelection(allowStored=true){
+   const params=new URL(location.href).searchParams;
+   if(params.has('s')){
+     try{validateState(decode(params.get('s')));return}catch(e){console.warn('Alter Link nicht lesbar',e)}
+   }
+   if(params.has('flst')){restoreCompact(params);return}
+   if(allowStored){
+     try{const stored=localStorage.getItem('flst-finder-v2');if(stored){validateState(JSON.parse(stored));return}}catch(e){console.warn('Lokale Auswahl nicht lesbar',e)}
+   }
+   selection.clear();
  }
  let saveTimer;
  function persistNow(){if(restoring)return;
-   const state=getState();try{localStorage.setItem('flst-finder-v2',JSON.stringify(state))}catch{ /* Lokale Speicherung ist optional. */ }
-   const u=new URL(location.href);u.searchParams.set('s',encode(state));
-   if(selection.size)u.searchParams.set('flst',[...selection.keys()].sort().join(','));else u.searchParams.delete('flst');
+   const state=getState();try{localStorage.setItem('flst-finder-v2',JSON.stringify(state))}catch{}
+   const u=new URL(location.href),ids=[...selection.keys()].sort();
+   u.searchParams.delete('s');
+   u.searchParams.set('flst',ids.join(','));
+   const positions=compactPositions(ids);
+   if(positions)u.searchParams.set('p',positions);else u.searchParams.delete('p');
+   const notes=ids.map((id,i)=>[i,selection.get(id)?.note||'']).filter(pair=>pair[1]);
+   if(notes.length)u.searchParams.set('n',encode(notes));else u.searchParams.delete('n');
    if(mapReady){const c=map.getCenter();u.searchParams.set('lat',c.lat.toFixed(6));u.searchParams.set('lon',c.lng.toFixed(6));u.searchParams.set('z',map.getZoom().toFixed(2));}
-   u.searchParams.set('bg',satellite?'photo':'map');
-   try{history.replaceState(null,'',u.toString())}catch{ /* Lokale Datei-URLs haben browserabhängige Einschränkungen. */ }
+   if(satellite)u.searchParams.set('bg','photo');else u.searchParams.delete('bg');
+   try{history.replaceState(null,'',u.toString())}catch{}
  }
  function persist(){if(restoring)return;clearTimeout(saveTimer);saveTimer=setTimeout(persistNow,180)}
- restore();
+ restoreSelection();
  const u=new URL(location.href);const lat=parseFloat(u.searchParams.get('lat')),lon=parseFloat(u.searchParams.get('lon')),z=parseFloat(u.searchParams.get('z'));
  const OVERVIEW=[7.5909,50.3585]; // Koblenz, neutraler Einstieg in Rheinland-Pfalz
  const start=Number.isFinite(lat)&&lat>=48.5&&lat<=51.3&&Number.isFinite(lon)&&lon>=5.8&&lon<=8.9?[lon,lat]:OVERVIEW;
@@ -185,11 +286,41 @@
    updateData();renderSelected();persist();
  }
  function toggle(k,f){selectByKey(k,f)}
+ async function focusSelectedParcel(k){
+   const item=selection.get(k);
+   if(!item||!mapReady)return;
+   if(!features.has(k)&&!item.anchor&&!item.center){
+     message('Suche die Position des Flurstücks …');
+     try{
+       const url=new URL(config.api);url.searchParams.set('flstkennz',k);url.searchParams.set('f','json');url.searchParams.set('limit','20');
+       const response=await geojson(url);requestCount++;
+       ingest(response.features.filter(f=>key(f)===k));
+     }catch(e){console.info('Gezielte Flurstückssuche nicht verfügbar',e?.message)}
+     if(!features.has(k)){message('Die Position ist noch nicht verfügbar. Bitte das Flurstück über die Karte suchen.','error');return}
+   }
+   const feature=features.get(k);
+   const bounds=feature?.geometry?geoBounds(feature.geometry):null;
+   const reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false;
+   if(bounds){
+     map.fitBounds([[bounds[0],bounds[1]],[bounds[2],bounds[3]]],{padding:70,maxZoom:19,duration:reducedMotion?0:650});
+   }else{
+     const point=item.anchor||item.center;
+     if(!point){message('Die Position dieses Flurstücks ist noch nicht verfügbar.','error');return}
+     map.flyTo({center:point,zoom:Math.max(config.minZoom+.5,map.getZoom()>=config.minZoom?Math.min(map.getZoom(),18):17),duration:reducedMotion?0:650});
+     message('Flurstück wird auf der Karte gesucht.');
+   }
+   if(window.matchMedia?.('(max-width: 720px)').matches){
+     $('map').scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'center'});
+   }
+ }
  function renderSelected(){const list=$('selection-list');list.replaceChildren();$('selected-count').textContent=`${selection.size} ausgewählt`;$('clear').disabled=selection.size===0;
    if(!selection.size){list.append(el('div','Flurstücke auf der Karte anklicken, um sie zu markieren.','empty'))}
    else for(const [k,item] of selection){
-     const wrap=el('div',undefined,'parcel-item'),dot=el('span',undefined,'dot'),txt=el('div',undefined,'name'),label=el('strong',item.name||k),id=el('small',k),edit=el('button',item.note?'Notiz ✓':'Notiz','btn'),remove=el('button','×','xbtn');
-     dot.style.background=HIGHLIGHT;txt.append(label,id);edit.type='button';edit.addEventListener('click',()=>{$('selection-accordion').open=true;selectedDetail=k;renderDetail();$('detail-note').focus()});
+     const wrap=el('div',undefined,'parcel-item'),dot=el('span',undefined,'dot'),txt=el('button',undefined,'name parcel-jump'),label=el('strong',item.name||k),id=el('small',k),edit=el('button',item.note?'Notiz ✓':'Notiz','btn'),remove=el('button','×','xbtn');
+     dot.style.background=HIGHLIGHT;txt.type='button';txt.setAttribute('aria-label',`Flurstück ${item.name||k} auf der Karte anzeigen`);
+     txt.title='Auf der Karte anzeigen';txt.append(label,id);
+     txt.addEventListener('click',()=>focusSelectedParcel(k));
+     edit.type='button';edit.addEventListener('click',()=>{$('selection-accordion').open=true;selectedDetail=k;renderDetail();$('detail-note').focus()});
      remove.type='button';remove.setAttribute('aria-label',`Flurstück ${item.name||k} abwählen`);remove.addEventListener('click',()=>toggle(k));
      wrap.append(dot,txt,edit,remove);list.append(wrap);
    }
@@ -366,8 +497,8 @@
  $('show-parcels').addEventListener('change',e=>{displayParcels=e.target.checked;updateVisibility();if(displayParcels){scheduledLoad()}else{if(inFlight)inFlight.abort();message('Flurstücke ausgeblendet.')}persist()});
  $('show-numbers').addEventListener('change',e=>{displayNumbers=e.target.checked;updateVisibility();persist()});$('reload').addEventListener('click',()=>loadViewport(true));
  $('show-wms').addEventListener('change',e=>{fallbackEnabled=e.target.checked;updateVisibility();});
- window.addEventListener('popstate',()=>{restoring=true;const u=new URL(location.href),s=u.searchParams.get('s');if(s){try{validateState(decode(s))}catch{}}else selection.clear();const lat=Number(u.searchParams.get('lat')),lon=Number(u.searchParams.get('lon')),z=Number(u.searchParams.get('z'));if(Number.isFinite(lat)&&Number.isFinite(lon)&&Number.isFinite(z)&&lat>=48.5&&lat<=51.3&&lon>=5.8&&lon<=8.9)map.jumpTo({center:[lon,lat],zoom:Math.max(6,Math.min(21,z))});satellite=u.searchParams.get('bg')==='photo';restoring=false;renderSelected();updateData();updateVisibility();scheduledLoad()});
- map.on('load',()=>{mapReady=true;readyLayers();renderSelected();updateData();syncRegion();loadStateBoundary();scheduledLoad()});
+ window.addEventListener('popstate',()=>{restoring=true;const u=new URL(location.href);restoreSelection(false);const lat=Number(u.searchParams.get('lat')),lon=Number(u.searchParams.get('lon')),z=Number(u.searchParams.get('z'));if(Number.isFinite(lat)&&Number.isFinite(lon)&&Number.isFinite(z)&&lat>=48.5&&lat<=51.3&&lon>=5.8&&lon<=8.9)map.jumpTo({center:[lon,lat],zoom:Math.max(6,Math.min(21,z))});satellite=u.searchParams.get('bg')==='photo';restoring=false;renderSelected();updateData();updateVisibility();scheduledLoad()});
+ map.on('load',()=>{mapReady=true;readyLayers();renderSelected();updateData();syncRegion();loadStateBoundary();scheduledLoad();persist()});
  map.on('moveend',()=>{if(!mapReady)return;updateData();syncRegion();scheduledLoad();persist()});
  renderSelected();
 })();
