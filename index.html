@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="Amtliche Flurstücke in Rheinland-Pfalz finden, markieren und teilen. Mit gut lesbaren Flurstücksnummern und persönlichen Notizen.">
+<title>Flurstück-Finder | Nur Rheinland-Pfalz – Suchen, Markieren und Teilen</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5.9.0/dist/maplibre-gl.css">
+<style>
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#152e42;background:#f7f9fc;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:#165986}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #ffb72f;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.55}.app{height:100dvh;display:grid;grid-template-rows:65px minmax(0,1fr)}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;background:white;border-bottom:1px solid #dfe7ee;padding:10px 22px}.brand{display:flex;align-items:center;gap:11px;min-width:0}.logo{width:38px;height:38px;border-radius:11px;background:#0d6057;color:white;display:grid;place-items:center;font-size:22px;font-weight:800}.brand strong{display:block;letter-spacing:-.035em;font-size:19px}.brand small{display:block;color:#667b8a;font-size:11px}.top-actions{display:flex;align-items:center;gap:8px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #cbd7e1;color:#214357;background:#fff;border-radius:10px;min-height:39px;padding:9px 13px;font-size:13px;font-weight:670;white-space:nowrap}.btn:hover{background:#eef4f7}.btn.primary{background:#0e6258;border-color:#0e6258;color:white}.btn.primary:hover{background:#094a43}.btn.ghost{border:0;background:transparent;padding:6px 8px}.content{display:grid;grid-template-columns:minmax(0,1fr) 365px;min-height:0}.map-area{position:relative;min-width:0;background:#dce5e9}.map{position:absolute;inset:0}.maplibregl-map{font:inherit}.maplibregl-ctrl-bottom-left{max-width:70%}.maplibregl-ctrl-attrib{font-size:10px!important}.map-panel{position:absolute;z-index:3;left:16px;top:16px;display:flex;flex-wrap:wrap;gap:9px;pointer-events:none;max-width:calc(100% - 32px)}.map-panel>*{pointer-events:auto}.map-switch{display:flex;background:white;border:1px solid #dce4ec;padding:4px;border-radius:11px;box-shadow:0 3px 15px #17385221;gap:2px}.map-switch button{border:0;border-radius:7px;padding:9px 13px;font-size:12px;background:transparent;color:#375366;font-weight:700}.map-switch button[aria-pressed=true]{background:#e4f2ee;color:#0a5e50}.map-check{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:11px;border:1px solid #dce4ec;background:#fff;box-shadow:0 3px 15px #17385218;font-size:12px;font-weight:650}.map-check[hidden]{display:none!important}.map-check input{accent-color:#0d6559;width:17px;height:17px}.map-notice{position:absolute;z-index:3;bottom:32px;left:16px;max-width:min(580px,calc(100% - 32px));border:1px solid #d9e4eb;border-radius:11px;background:#fffffff0;color:#39586c;box-shadow:0 3px 15px #17385218;padding:10px 13px;font-size:12px;line-height:1.5}.map-notice[data-tone=error]{background:#fff3eb;color:#924414;border-color:#ecc5a9}.map-notice[data-tone=success]{background:#eef8f1;color:#285a43;border-color:#cbe6d3}.sidebar{min-height:0;overflow-y:auto;background:white;border-left:1px solid #dbe3eb;padding:19px;display:flex;flex-direction:column;gap:22px}.section{display:grid;gap:10px}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}.section h2{font-size:15px;letter-spacing:-.016em;margin:0}.eyebrow{font-size:11px;color:#70869a;text-transform:uppercase;font-weight:800;letter-spacing:.09em}.field{display:grid;gap:5px}.field label,.field>span{font-size:12px;font-weight:690;color:#3f596b}.field input,.field select,.field textarea{background:#fff;border:1px solid #cbd6e0;border-radius:8px;padding:9px 10px;min-height:39px;color:#152e42;width:100%;font-size:13px}.field textarea{resize:vertical;min-height:78px;line-height:1.5}.row{display:flex;align-items:center;gap:8px}.row>*{min-width:0}.row .grow{flex:1}.tiny{font-size:12px;line-height:1.5;color:#63788a}.muted{color:#738699}.search-result,.parcel-item{border:1px solid #dfe7ed;border-radius:10px;padding:10px 11px;background:white;display:flex;gap:10px;align-items:center;justify-content:space-between}.search-result .text{min-width:0;flex:1}.search-result strong,.parcel-item strong{font-size:13px;display:block}.search-result small,.parcel-item small{font-size:11px;color:#65788a;display:block;line-height:1.5}.results,.selected{display:grid;gap:7px;max-height:230px;overflow-y:auto}.empty{border:1px dashed #d4e0e8;border-radius:10px;padding:17px 12px;text-align:center;font-size:12px;color:#788c9b;line-height:1.5}.counter{font-size:11px;color:#115f52;font-weight:780;background:#e9f4f1;border-radius:999px;padding:4px 9px}.dot{display:inline-block;flex:none;width:12px;height:12px;border-radius:50%;background:#f59b23;border:2px solid #fff;box-shadow:0 0 0 1px #b5c6cd}.parcel-item{padding:9px 10px}.parcel-item .name{flex:1;min-width:0}.xbtn{border:0;background:transparent;border-radius:8px;min-width:29px;min-height:31px;font-size:20px;color:#647b8a}.xbtn:hover{background:#f3e6e2;color:#9d4f34}.pill{font-size:11px;background:#f1f5f8;color:#4c6576;padding:3px 7px;border-radius:7px}.rule{height:1px;background:#e6edf2}.help{font-size:11px;color:#667a87;line-height:1.55}.detail{background:#f7fafb;border:1px solid #e0e9ed;border-radius:10px;padding:12px;display:grid;gap:10px}.detail[hidden]{display:none}.credit{font-size:10px;line-height:1.5;color:#788999;margin-top:auto;padding-top:12px}.credit a{color:inherit}.print-sheet{display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.region-badge{margin-right:auto;white-space:nowrap;border:1px solid #a7d6c8;background:#e9f7f2;color:#14594d;font-size:12px;font-weight:800;border-radius:999px;padding:8px 12px}
+.region-warning{position:absolute;z-index:4;top:78px;left:16px;max-width:min(460px,calc(100% - 32px));border:1px solid #e9bd9d;background:#fff6ed;color:#853e11;box-shadow:0 4px 20px #17385222;border-radius:11px;padding:13px 16px;font-size:14px;font-weight:680;line-height:1.5}
+.region-warning[hidden]{display:none!important}
+.accordion{display:block;border:1px solid #dfe7ed;border-radius:11px;overflow:clip;gap:0}
+.accordion>summary{display:flex;gap:8px;justify-content:space-between;align-items:center;padding:15px 12px;cursor:pointer;list-style:none;color:#183f53;background:#f8fafb;font-weight:750;font-size:14px}
+.accordion>summary::-webkit-details-marker{display:none}
+.accordion>summary:before{content:'›';display:inline-flex;align-items:center;justify-content:center;flex:none;border:1px solid #cedce3;width:22px;height:22px;border-radius:7px;font-size:19px;font-weight:500;line-height:1;transition:transform .15s ease}
+.accordion[open]>summary:before{transform:rotate(90deg)}
+.accordion>summary:hover{background:#edf4f5}
+.accordion>summary:focus-visible{outline:3px solid #ffb72f;outline-offset:-3px}
+.accordion .accordion-title{flex:1}
+.accordion-body{padding:14px 12px;display:grid;gap:10px}
+.accordion .accordion-body .section{gap:10px}
+@media(max-width:720px){.region-badge{font-size:11px;padding:7px 8px}.region-warning{left:9px;top:66px;max-width:calc(100% - 18px)}}
+@media(max-width:940px){.content{grid-template-columns:minmax(0,1fr) 320px}.sidebar{padding:14px}}@media(max-width:500px){.region-badge{white-space:normal;font-size:10px;max-width:88px;text-align:center;line-height:1.2}.brand{gap:7px}.logo{width:30px;height:30px}.brand strong{font-size:15px}.brand small{display:none}.top-actions .btn.primary{padding:8px 10px;font-size:12px}}
+@media(max-width:720px){.app{display:block;height:auto;min-height:100dvh}.top{padding:10px 13px}.brand strong{font-size:17px}.brand small{font-size:10px}.top-actions .btn:not(.primary){display:none}.content{display:flex;flex-direction:column}.map-area{height:55svh;min-height:350px}.sidebar{border-left:0;border-top:1px solid #e0e7ed;overflow:visible;padding:16px;gap:17px}.map-panel{top:9px;left:9px;gap:6px}.map-notice{bottom:22px;left:9px;font-size:11px}.map-switch button{padding:7px 9px}}@page{size:A4 landscape;margin:10mm}
+@media print{html,body{width:auto;height:auto;background:#fff!important;margin:0!important;padding:0!important} .app{display:none!important}.print-sheet{display:block!important;max-width:100%;font-family:system-ui,sans-serif;color:#193044}.print-sheet h1{font-size:17pt;line-height:1.2;margin:0 0 3mm}.print-sheet p{margin:2mm 0;font-size:9pt;line-height:1.4}.print-sheet img{display:block;width:auto;height:auto;max-width:100%;max-height:158mm;object-fit:contain;border:1px solid #c5d2db;print-color-adjust:exact;-webkit-print-color-adjust:exact}.print-credit{font-size:7.5pt!important;color:#4b6475}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+  <div class="brand"><div class="logo" aria-hidden="true">⌗</div><div><strong>Flurstück-Finder</strong><small>Amtliche Katasterdaten und eigene Markierungen</small></div></div>
+  <span class="region-badge" aria-label="Derzeit nur Rheinland-Pfalz verfügbar">Nur Rheinland-Pfalz</span><div class="top-actions"><button class="btn" id="print" type="button">Drucken / PDF</button><button class="btn primary" type="button" id="share">Link kopieren</button></div>
+</header>
+<main class="content">
+  <section class="map-area" aria-label="Interaktive Karte mit Flurstücksauswahl"><div id="map" class="map" aria-label="Karte; Flurstücke durch Anklicken auswählen"></div>
+    <div class="map-panel" role="group" aria-label="Kartendarstellung">
+      <div class="map-switch"><button type="button" id="base-light" aria-pressed="true">Karte</button><button type="button" id="base-photo" aria-pressed="false">Luftbild</button></div>
+      <label class="map-check"><input type="checkbox" id="show-parcels" checked>Flurstücke</label>
+      <label class="map-check"><input type="checkbox" id="show-numbers" checked>Nummern</label>
+      <label class="map-check" id="wms-control" hidden><input type="checkbox" id="show-wms" checked>Grenzen als Bild</label>
+    </div>
+    <div class="region-warning" id="region-warning" role="status" aria-live="polite" hidden>Außerhalb von Rheinland-Pfalz: Für diese Region sind noch keine Flurstücksdaten angebunden.</div>
+    <div class="map-notice" id="map-status" role="status" aria-live="polite">Zoome in die Karte, um Flurstücke anzuzeigen.</div>
+  </section>
+  <aside class="sidebar" aria-label="Flurstücke suchen und bearbeiten">
+    <section class="section" aria-labelledby="place-title"><div class="section-head"><h2 id="place-title">Ort oder Adresse suchen</h2></div><form id="place-form" class="row"><label class="field grow"><span class="visually-hidden" style="position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden">Ort oder Adresse</span><input id="place-input" type="search" autocomplete="street-address" placeholder="z. B. Koblenz, Löhrstraße" required maxlength="120"></label><button class="btn primary" type="submit">Suchen</button></form><div id="place-results" class="results" role="region" aria-live="polite"></div></section>
+    <div class="rule"></div>
+    <details class="section accordion" id="parcel-accordion"><summary id="parcel-title"><span class="accordion-title">Flurstück suchen</span></summary><div class="accordion-body"><form id="parcel-form" class="section"><label class="field"><span>Gemarkung</span><input type="text" id="gemarkung" placeholder="z. B. Koblenz" autocomplete="off" required maxlength="90"></label><div class="row"><label class="field grow"><span>Flur</span><input type="number" inputmode="numeric" id="flur" min="0" max="9999" placeholder="z. B. 7 (Pfalz: 0)"></label><label class="field grow"><span>Flurstücksnummer</span><input type="text" id="nummer" inputmode="text" placeholder="z. B. 72/3" required maxlength="16" pattern="[0-9]+(/[0-9]+)?" title="Zähler oder Zähler/Nenner"></label></div><button class="btn" type="submit" id="parcel-submit">Flurstück finden</button><div id="parcel-results" class="results" role="region" aria-live="polite"></div></form><p class="help" style="margin:0">In der Pfalz gilt häufig Flur 0.</p></div></details>
+    <div class="rule"></div>
+    <details class="section accordion" id="selection-accordion"><summary id="selection-title"><span class="accordion-title">Ausgewählte Flurstücke</span><span class="counter" id="selected-count" aria-live="polite">0 ausgewählt</span></summary><div class="accordion-body">
+      <p class="tiny" style="margin:0">Flurstück anklicken, um es zu markieren. Ein weiterer Klick hebt die Auswahl auf.</p>
+      <div class="selected" id="selection-list" aria-label="Markierte Flurstücke"></div>
+      <section id="details" class="detail" hidden aria-label="Notiz zum Flurstück">
+        <div class="section-head"><strong id="detail-heading"></strong><button type="button" class="xbtn" id="close-detail" aria-label="Notiz schließen">×</button></div>
+        <label class="field"><span>Notiz (optional)</span><textarea id="detail-note" maxlength="400" placeholder="Eigene Notiz zum Flurstück …"></textarea></label>
+        <div class="row"><span id="detail-meta" class="tiny grow"></span><button class="btn" id="deselect-detail" type="button">Abwählen</button></div>
+      </section>
+      <div class="row"><button type="button" class="btn" id="clear" disabled>Auswahl leeren</button></div>
+      <p class="tiny" id="storage-note" style="margin:0">Markierungen und Notizen werden gespeichert. Wer den Link erhält, kann auch die Notizen lesen.</p></div>
+    </details>
+    <div class="rule"></div>
+    <details class="section accordion" id="data-accordion"><summary><span class="accordion-title">Datenstatus</span><span class="pill" id="data-count">0 geladen</span></summary><div class="accordion-body"><div class="row"><button type="button" class="btn" id="reload">Flurstücke aktualisieren</button></div><div id="api-info" class="tiny" aria-live="polite"></div></div></details>
+    <div class="credit">Verfügbar ausschließlich für Rheinland-Pfalz. ©GeoBasis-DE / LVermGeoRP 2026, <a href="https://www.govdata.de/dl-de/by-2-0" target="_blank" rel="noopener noreferrer">dl-de/by-2-0</a>, <a href="https://lvermgeo.rlp.de/" target="_blank" rel="noopener noreferrer">www.lvermgeo.rlp.de</a> [Daten bearbeitet].<br>Grundkarte: © GeoBasis-DE / BKG, basemap.de. Luftbilder: © GeoBasis-DE / LVermGeoRP (DOP20). Geokodierung: © OpenStreetMap-Mitwirkende / <a href="https://github.com/komoot/photon" target="_blank" rel="noopener noreferrer">Photon</a>. Die Katasterdarstellung ist eine unverbindliche Information und ersetzt keinen amtlichen Auszug.</div>
+  </aside>
+</main>
+</div>
+<section class="print-sheet" id="print-sheet" aria-label="Kartenansicht für den Druck">
+  <h1>Flurstück-Finder · Rheinland-Pfalz</h1>
+  <p id="print-subtitle">Aktueller Kartenausschnitt</p>
+  <img id="print-image" alt="Kartenausschnitt mit Flurstücksgrenzen und ausgewählten Flurstücken">
+  <p id="print-selected"></p>
+  <p class="print-credit">Flurstücke © GeoBasis-DE / LVermGeoRP, dl-de/by-2-0 (Daten bearbeitet). Grundkarte © GeoBasis-DE / BKG. Kartenausschnitt aus der aktuellen Ansicht.</p>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.9.0/dist/maplibre-gl.js"></script>
+<script>
+'use strict';
+(() => {
+ const $=id=>document.getElementById(id);
+ const HIGHLIGHT='#eb8c18';
+ const config={region:'Rheinland-Pfalz',minZoom:15.3,api:'https://www.geoportal.rlp.de/spatial-objects/519/collections/ave%3AFlurstueck/items',maxPages:8,pageSize:500};
+ const areaAdapter={id:'rlp',config,queryBbox:(bbox)=>{const u=new URL(config.api);u.searchParams.set('bbox',bbox.join(','));u.searchParams.set('limit',config.pageSize);u.searchParams.set('f','json');return u;},queryParcel:(gem,flur,zae,nen)=>{const u=new URL(config.api);u.searchParams.set('gemarkung',gem);u.searchParams.set('flstnrzae',zae);if(nen)u.searchParams.set('flstnrnen',nen);if(flur!=='')u.searchParams.set('flur',String(flur));u.searchParams.set('limit','100');u.searchParams.set('f','json');return u;}};
+ let selection=new Map(),features=new Map(),selectedDetail=null,loadedRegions=[],inFlight=null,loadTimer=0,remoteResults=[],placeResults=[],requestCount=0,mapReady=false,displayParcels=true,displayNumbers=true,satellite=false;
+ let restoring=false, rasterFallback=false, fallbackEnabled=true, lastFetchErrorAt=0, hydrationPending=false, regionMode='unknown';
+ const hydrations=new Set();
+  // Clientseitige Cache-Abdeckung anhand vollständig geladener Ausschnitte.
+ const src='alkis-features';
+ const sanitize = value => String(value??'').trim();
+ const norm = s=>sanitize(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('de');
+ const validId = id=>/^[A-Za-z0-9_-]{6,50}$/.test(id);
+ const number = f=> {const p=f.properties||{};return String(p.flstnrzae??'?')+(p.flstnrnen===null||p.flstnrnen===undefined||p.flstnrnen===''?'':'/'+p.flstnrnen)};
+ const key = f=>sanitize(f.properties?.flstkennz||f.properties?.idflurst||f.properties?.oid||f.id||'');
+ const desc = f=>`${number(f)} · ${f.properties?.gemarkung||'Gemarkung unbekannt'} · ${f.properties?.flur||''}`;
+ function geoBounds(g){const vals=[];function walk(x){if(typeof x?.[0]==='number')vals.push(x);else if(Array.isArray(x))x.forEach(walk)}walk(g.coordinates);return vals.length?[Math.min(...vals.map(p=>p[0])),Math.min(...vals.map(p=>p[1])),Math.max(...vals.map(p=>p[0])),Math.max(...vals.map(p=>p[1]))]:null}
+ const featureCenter=f=>{const bb=geoBounds(f.geometry);return bb?[(bb[0]+bb[2])/2,(bb[1]+bb[3])/2]:null};
+ function message(t,tone=''){if(regionMode==='outside'){t='Außerhalb von Rheinland-Pfalz sind derzeit keine Katasterdaten verfügbar.';tone='error';}const el=$('map-status');el.textContent=t;el.dataset.tone=tone;}
+ function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(cls)n.className=cls;return n}
+ function encode(x){const bytes=new TextEncoder().encode(JSON.stringify(x));let s='';for(const b of bytes)s+=String.fromCharCode(b);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+ function decode(s){const bin=atob(s.replace(/-/g,'+').replace(/_/g,'/'));return JSON.parse(new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0))))}
+ function pickAnchor(f){const geom=f?.geometry;const coords=geom?.type==='Polygon'?geom.coordinates?.[0]:geom?.type==='MultiPolygon'?geom.coordinates?.[0]?.[0]:null;const pt=coords?.[0];return Array.isArray(pt)&&pt.length>=2&&Number.isFinite(pt[0])&&Number.isFinite(pt[1])?[pt[0],pt[1]]:null;}
+ function getState(){return {v:2,selected:[...selection].map(([id,v])=>({id,note:v.note||'',name:v.name||'',center:v.center||null,anchor:v.anchor||null,area:v.area??null}))};}
+ function validateState(state){
+   if(!state||![1,2].includes(state.v)||!Array.isArray(state.selected))throw Error('Ungültige Auswahl');
+   selection.clear();
+   for(const v of state.selected.slice(0,250)){
+     if(!validId(v.id))continue;
+     const location=val=>Array.isArray(val)&&val.length===2&&Number.isFinite(val[0])&&Number.isFinite(val[1])&&val[0]>=5&&val[0]<=10&&val[1]>=48&&val[1]<=52?val:null;
+     selection.set(v.id,{note:sanitize(v.note).slice(0,400),name:sanitize(v.name).slice(0,150)||v.id,center:location(v.center),anchor:location(v.anchor)||location(v.center),area:Number.isFinite(v.area)?v.area:null});
+   }
+ }
+ function restore(){const params=new URL(location.href).searchParams;const fromURL=params.get('s');let candidate=null;
+   try{if(fromURL){candidate=decode(fromURL)}else{const stored=localStorage.getItem('flst-finder-v2');if(stored)candidate=JSON.parse(stored)}if(candidate)validateState(candidate)}catch(e){console.warn('Die Auswahl konnte nicht geladen werden',e)}
+ }
+ let saveTimer;
+ function persistNow(){if(restoring)return;
+   const state=getState();try{localStorage.setItem('flst-finder-v2',JSON.stringify(state))}catch{ /* Lokale Speicherung ist optional. */ }
+   const u=new URL(location.href);u.searchParams.set('s',encode(state));
+   if(selection.size)u.searchParams.set('flst',[...selection.keys()].sort().join(','));else u.searchParams.delete('flst');
+   if(mapReady){const c=map.getCenter();u.searchParams.set('lat',c.lat.toFixed(6));u.searchParams.set('lon',c.lng.toFixed(6));u.searchParams.set('z',map.getZoom().toFixed(2));}
+   u.searchParams.set('bg',satellite?'photo':'map');
+   try{history.replaceState(null,'',u.toString())}catch{ /* Lokale Datei-URLs haben browserabhängige Einschränkungen. */ }
+ }
+ function persist(){if(restoring)return;clearTimeout(saveTimer);saveTimer=setTimeout(persistNow,180)}
+ restore();
+ const u=new URL(location.href);const lat=parseFloat(u.searchParams.get('lat')),lon=parseFloat(u.searchParams.get('lon')),z=parseFloat(u.searchParams.get('z'));
+ const OVERVIEW=[7.5909,50.3585]; // Koblenz, neutraler Einstieg in Rheinland-Pfalz
+ const start=Number.isFinite(lat)&&lat>=48.5&&lat<=51.3&&Number.isFinite(lon)&&lon>=5.8&&lon<=8.9?[lon,lat]:OVERVIEW;
+ const startZoom=Number.isFinite(z)?Math.max(7,Math.min(20,z)):12.4;
+ satellite=u.searchParams.get('bg')==='photo';
+ if(!window.maplibregl){message('Kartenbibliothek konnte nicht geladen werden. Internetverbindung und Browserzugriff prüfen.','error');return;}
+ const map=new maplibregl.Map({container:'map',style:'https://sgx.geodatenzentrum.de/gdz_basemapde_vektor/styles/bm_web_gry.json',center:start,zoom:startZoom,minZoom:6,maxZoom:21,attributionControl:false,hash:false,dragRotate:false,pitchWithRotate:false,canvasContextAttributes:{preserveDrawingBuffer:true}});
+ map.addControl(new maplibregl.NavigationControl({showCompass:false}), 'bottom-right');map.addControl(new maplibregl.ScaleControl({maxWidth:130,unit:'metric'}),'bottom-left');map.addControl(new maplibregl.AttributionControl({compact:true}),'bottom-right');
+ let lastPhotoError=false;
+ map.on('error',e=>{console.warn('Kartendienst:',e.error?.message||e);
+   if(satellite && !lastPhotoError && String(e.sourceId||e.source?.id||'').includes('photo')){
+     lastPhotoError=true;message('Luftbild aktuell nicht erreichbar. Du kannst zur Kartenansicht wechseln.','error');
+   }
+ });
+ const SAT_URL='https://geo4.service24.rlp.de/wms/rp_dop20.fcgi?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=rp_dop20&STYLES=&FORMAT=image/jpeg&SRS=EPSG:3857&TRANSPARENT=FALSE&WIDTH=256&HEIGHT=256&BBOX={bbox-epsg-3857}';
+ const WMS_URL='https://geo5.service24.rlp.de/wms/liegenschaften_rp.fcgi?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Flurstueck&STYLES=&FORMAT=image/png&TRANSPARENT=TRUE&SRS=EPSG:3857&WIDTH=256&HEIGHT=256&BBOX={bbox-epsg-3857}';
+ function readyLayers(){if(!map.getSource(src)){
+   map.addSource(src,{type:'geojson',data:{type:'FeatureCollection',features:[]},promoteId:'parcel_key'});
+   map.addLayer({id:'parcels-fill',type:'fill',source:src,paint:{'fill-color':['case',['boolean',['get','selected'],false],['get','pick_color'],'#3b86b2'],'fill-opacity':['case',['boolean',['get','selected'],false],.43,.09]}});
+   map.addLayer({id:'parcels-border',type:'line',source:src,paint:{'line-color':['case',['boolean',['get','selected'],false],['get','pick_color'],'#18648b'],'line-width':['case',['boolean',['get','selected'],false],3.2,1.25],'line-opacity':.96}});
+   map.addLayer({id:'parcels-numbers',type:'symbol',source:src,filter:['!', ['get','selected']],layout:{'text-field':['get','number'],'text-size':16,'text-font':['literal',['Noto Sans Regular']],'text-allow-overlap':false,'text-padding':5,'symbol-placement':'point'},paint:{'text-color':'#143c58','text-halo-color':'#fff','text-halo-width':2.8}});
+   map.addLayer({id:'parcels-selected-numbers',type:'symbol',source:src,filter:['==',['get','selected'],true],layout:{'text-field':['get','number'],'text-size':19,'text-font':['literal',['Noto Sans Regular']],'text-allow-overlap':false},paint:{'text-color':'#102c44','text-halo-color':'#fff','text-halo-width':3.5}});
+   // Nur ein gemeinsamer Handler verhindert doppeltes Umschalten bei Klicks auf Grenzen.
+   map.on('click',e=>{if(!displayParcels)return;const hits=map.queryRenderedFeatures(e.point,{layers:['parcels-fill','parcels-border']});const f=hits[0];if(f?.properties?.parcel_key)toggle(f.properties.parcel_key,features.get(f.properties.parcel_key)||f);});
+   map.on('mouseenter','parcels-fill',()=>{map.getCanvas().style.cursor='pointer'});map.on('mouseleave','parcels-fill',()=>{map.getCanvas().style.cursor=''});
+  }
+  if(!map.getSource('photo-tiles'))map.addSource('photo-tiles',{type:'raster',tiles:[SAT_URL],tileSize:256,attribution:'©GeoBasis-DE / LVermGeoRP'});
+  if(!map.getLayer('photo-layer'))map.addLayer({id:'photo-layer',type:'raster',source:'photo-tiles',layout:{visibility:satellite?'visible':'none'},paint:{'raster-opacity':1}},'parcels-fill');
+  // CORS-frei als Bild ladbarer amtlicher WMS-Fallback. Kein Ersatz für anklickbare Polygone.
+  if(!map.getSource('parcel-wms-source'))map.addSource('parcel-wms-source',{type:'raster',tiles:[WMS_URL],tileSize:256,attribution:'© GeoBasis-DE / LVermGeoRP, dl-de/by-2-0'});
+  if(!map.getLayer('parcel-wms'))map.addLayer({id:'parcel-wms',type:'raster',source:'parcel-wms-source',layout:{visibility:'none'}},'parcels-fill');
+  updateVisibility();
+ }
+ function updateVisibility(){if(!mapReady)return;const show=displayParcels&&regionMode!=='outside';for(const id of ['parcels-fill','parcels-border'])map.setLayoutProperty(id,'visibility',show?'visible':'none');for(const id of ['parcels-numbers','parcels-selected-numbers'])map.setLayoutProperty(id,'visibility',show&&displayNumbers?'visible':'none');map.setLayoutProperty('photo-layer','visibility',satellite?'visible':'none');map.setLayoutProperty('parcel-wms','visibility',show&&rasterFallback&&fallbackEnabled&&map.getZoom()>=config.minZoom?'visible':'none');$('base-light').setAttribute('aria-pressed',String(!satellite));$('base-photo').setAttribute('aria-pressed',String(satellite));}
+ function ingest(list){let changes=0,updated=false;
+   for(const f of list||[]){if(!f||!['Polygon','MultiPolygon'].includes(f.geometry?.type))continue;
+     const k=key(f);if(!validId(k))continue;
+     if(!features.has(k)){features.set(k,{type:'Feature',id:k,geometry:f.geometry,properties:{...f.properties,parcel_key:k}});changes++;}
+     if(selection.has(k)){const v=selection.get(k);v.name=desc(f);v.center=featureCenter(f);v.anchor=pickAnchor(f)||v.anchor;v.area=Number(f.properties?.flaeche)||null;updated=true;}
+   }
+   if(features.size>3600){const view=map.getBounds();for(const [oldId,oldF] of features){if(features.size<=2800)break;if(selection.has(oldId))continue;const b=geoBounds(oldF.geometry);if(b&&(b[2]<view.getWest()||b[0]>view.getEast()||b[3]<view.getSouth()||b[1]>view.getNorth()))features.delete(oldId)}coveredAreas.length=0;}
+   if(changes||updated){updateData();renderSelected()}
+   return changes;
+ }
+ function updateData(){if(!mapReady||!map.getSource(src))return;const view=map.getBounds(),shown=[];
+   for(const [k,f] of features){const b=geoBounds(f.geometry);if(!b||b[2]<view.getWest()||b[0]>view.getEast()||b[3]<view.getSouth()||b[1]>view.getNorth())continue;
+     shown.push({...f,properties:{...f.properties,number:number(f),selected:selection.has(k),pick_color:HIGHLIGHT}});
+   }
+   map.getSource(src).setData({type:'FeatureCollection',features:shown});
+   $('data-count').textContent=`${shown.length} im Ausschnitt`;
+ }
+ function selectByKey(k,f){if(selection.has(k))selection.delete(k);else{
+     if(selection.size>=250){message('Maximal 250 Flurstücke pro Auswahl.','error');return;}
+     const f0=features.get(k)||f,p=f0?.properties||{};
+     selection.set(k,{note:'',name:f0?desc(f0):k,center:f0?featureCenter(f0):null,anchor:f0?pickAnchor(f0):null,area:Number(p.flaeche)||null});
+   }
+   if(selectedDetail===k&&!selection.has(k))selectedDetail=null;
+   updateData();renderSelected();persist();
+ }
+ function toggle(k,f){selectByKey(k,f)}
+ function renderSelected(){const list=$('selection-list');list.replaceChildren();$('selected-count').textContent=`${selection.size} ausgewählt`;$('clear').disabled=selection.size===0;
+   if(!selection.size){list.append(el('div','Flurstücke auf der Karte anklicken, um sie zu markieren.','empty'))}
+   else for(const [k,item] of selection){
+     const wrap=el('div',undefined,'parcel-item'),dot=el('span',undefined,'dot'),txt=el('div',undefined,'name'),label=el('strong',item.name||k),id=el('small',k),edit=el('button',item.note?'Notiz ✓':'Notiz','btn'),remove=el('button','×','xbtn');
+     dot.style.background=HIGHLIGHT;txt.append(label,id);edit.type='button';edit.addEventListener('click',()=>{$('selection-accordion').open=true;selectedDetail=k;renderDetail();$('detail-note').focus()});
+     remove.type='button';remove.setAttribute('aria-label',`Flurstück ${item.name||k} abwählen`);remove.addEventListener('click',()=>toggle(k));
+     wrap.append(dot,txt,edit,remove);list.append(wrap);
+   }
+   renderDetail();
+ }
+ function renderDetail(){const box=$('details');if(!selectedDetail||!selection.has(selectedDetail)){box.hidden=true;return;}box.hidden=false;const it=selection.get(selectedDetail);
+   $('detail-heading').textContent=it.name||selectedDetail;
+   if(document.activeElement!==$('detail-note'))$('detail-note').value=it.note;
+   $('detail-meta').textContent=it.area?`${Math.round(it.area).toLocaleString('de-DE')} m² · amtliche Fläche`:selectedDetail;
+ }
+  async function geojson(url,signal){const resp=await fetch(url.toString(),{method:'GET',mode:'cors',credentials:'omit',headers:{Accept:'application/geo+json, application/json'},signal});if(!resp.ok)throw new Error('HTTP '+resp.status);const json=await resp.json();if(!Array.isArray(json.features))throw new Error('Die API liefert keine GeoJSON-Features');return json;}
+  function safeNext(href,base){
+    const url=new URL(href,base);
+    if(url.protocol!=='https:'||!['www.geoportal.rlp.de','geoportal.rlp.de'].includes(url.hostname)||!url.pathname.startsWith('/spatial-objects/519/'))throw new Error('Unbekanntes Paginierungsziel');
+    return url;
+  }
+  function scheduledLoad(){clearTimeout(loadTimer);loadTimer=setTimeout(()=>loadViewport(),380)}
+  function setApiInfo(text){$('api-info').textContent=text}
+  function fallback(on){rasterFallback=on;$('wms-control').hidden=!on;if(mapReady)updateVisibility()}
+
+  const coveredAreas=[];
+  // Published extent of the state boundary, only as a fallback until the real boundary is loaded.
+  const regionBounds={west:6.037773,south:48.897996,east:8.617703,north:51.000893};
+  const BORDER_API='https://www.geoportal.rlp.de/spatial-objects/314/collections/vermkv%3Alandesgrenze_rlp/items?f=json&limit=10';
+  let stateBoundary=null;
+  function inRing([x,y],ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+    const a=ring[i],b=ring[j];if(((a[1]>y)!==(b[1]>y))&&(x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0]))inside=!inside;
+  }return inside;}
+  function inGeometry(pt,g){if(!g)return false;const polys=g.type==='Polygon'?[g.coordinates]:g.type==='MultiPolygon'?g.coordinates:[];
+    return polys.some(p=>p.length&&inRing(pt,p[0])&&!p.slice(1).some(h=>inRing(pt,h)));
+  }
+  function regionAt([lon,lat]){
+    if(lon<regionBounds.west||lon>regionBounds.east||lat<regionBounds.south||lat>regionBounds.north)return 'outside';
+    return stateBoundary?(inGeometry([lon,lat],stateBoundary)?'inside':'outside'):'unknown';
+  }
+  function syncRegion(){
+    const center=map.getCenter();regionMode=regionAt([center.lng,center.lat]);
+    const outside=regionMode==='outside';$('region-warning').hidden=!outside;
+    if(outside){if(inFlight)inFlight.abort();message('Außerhalb von Rheinland-Pfalz sind derzeit keine Katasterdaten verfügbar.','error');}
+    updateVisibility();return !outside;
+  }
+  async function loadStateBoundary(){
+    try{const ctl=new AbortController();const timeout=setTimeout(()=>ctl.abort(),14000);
+      let response;try{response=await geojson(new URL(BORDER_API),ctl.signal);}finally{clearTimeout(timeout)}
+      const state=response.features.find(f=>f.geometry&&/rheinland.pfalz/i.test(String(f.properties?.name||'')));
+      if(!state)throw Error('Landesgrenze nicht verfügbar');
+      const g=state.geometry;
+      if(g.type==='Polygon'||g.type==='MultiPolygon')stateBoundary=g;
+      else{
+        // Einige Verwaltungsgrenzen werden als geschlossener Linienring übertragen.
+        const rings=g.type==='LineString'?[g.coordinates]:g.type==='MultiLineString'?g.coordinates:[];
+        const closed=rings.filter(r=>r.length>3&&Math.abs(r[0][0]-r.at(-1)[0])<1e-6&&Math.abs(r[0][1]-r.at(-1)[1])<1e-6);
+        if(closed.length)stateBoundary={type:'MultiPolygon',coordinates:closed.map(r=>[r])};
+        else throw Error('Landesgrenze enthält keinen geschlossenen Polygonumriss');
+      }
+      if(mapReady){syncRegion();scheduledLoad();}
+    }catch(e){console.info('Landesgrenze derzeit nicht abrufbar; Prüfung anhand der räumlichen Ausdehnung.',e?.message);}
+  }
+  function bboxView(){
+    const v=map.getBounds();
+    const south=Math.max(regionBounds.south,v.getSouth()),north=Math.min(regionBounds.north,v.getNorth());
+    const west=Math.max(regionBounds.west,v.getWest()),east=Math.min(regionBounds.east,v.getEast());
+    if(east<=west||north<=south)return null;
+    const latPad=3/111320,lonPad=3/(111320*Math.max(.3,Math.cos(((north+south)/2)*Math.PI/180)));
+    return [Math.max(regionBounds.west,west-lonPad),Math.max(regionBounds.south,south-latPad),Math.min(regionBounds.east,east+lonPad),Math.min(regionBounds.north,north+latPad)].map(v=>Number(v.toFixed(7)));
+  }
+  const isWithin=(a,b)=>a[0]>=b[0]-1e-8&&a[1]>=b[1]-1e-8&&a[2]<=b[2]+1e-8&&a[3]<=b[3]+1e-8;
+  function buildParcelURL(bbox){
+    const url=new URL(config.api);
+    url.searchParams.set('bbox',bbox.join(','));
+    url.searchParams.set('f','json');
+    url.searchParams.set('limit',String(config.pageSize));
+    return url;
+  }
+  async function loadViewport(force=false){
+    if(!mapReady)return;
+    updateData();if(!syncRegion())return;
+    if(!displayParcels){message('Flurstücke ausgeblendet.');return}
+    if(map.getZoom()<config.minZoom){message('Näher heranzoomen, um Flurstücke anzuzeigen.');return}
+    const bbox=bboxView();
+    if(!bbox){message('Der Kartenausschnitt liegt außerhalb der unterstützten Region.');return}
+    if(!force&&coveredAreas.some(v=>isWithin(bbox,v))){message('Flurstücke im Kartenausschnitt geladen.','success');hydrateVisibleSelection();return}
+    if(!force&&lastFetchErrorAt&&Date.now()-lastFetchErrorAt<12000){message('Die Katasterdaten sind momentan nicht erreichbar. Bitte später erneut versuchen.','error');return}
+    if(inFlight)inFlight.abort();
+    const controller=new AbortController();inFlight=controller;
+    let url=buildParcelURL(bbox),pages=0,newCount=0,incomplete=false;
+    const visited=new Set();
+    message('Lade sichtbare Flurstücke …');
+    try{
+      while(url){
+        if(controller.signal.aborted)return;
+        const u=url.toString();
+        if(visited.has(u))throw new Error('Die API wiederholt eine Ergebnisseite');
+        visited.add(u);
+        const data=await geojson(url,controller.signal);
+        requestCount++;pages++;newCount+=ingest(data.features);
+        const next=(data.links||[]).find(x=>String(x.rel).toLowerCase()==='next'&&x.href);
+        url=next?safeNext(next.href,url):null;
+        if(url&&pages>=config.maxPages){incomplete=true;break}
+      }
+      lastFetchErrorAt=0;fallback(false);
+      if(!incomplete){coveredAreas.push(bbox);message(`${newCount} neue Flurstücke geladen. Durch Anklicken markieren oder abwählen.`,'success')}
+      else{message('Weitere Flurstücke sind verfügbar. Für eine vollständige Ansicht bitte näher heranzoomen.')}
+      setApiInfo('Quelle: amtliches Liegenschaftskataster Rheinland-Pfalz.');
+      updateData();persist();
+    }catch(err){
+      if(controller.signal.aborted)return;
+      lastFetchErrorAt=Date.now();fallback(true);
+      message('Flurstücke konnten nicht vollständig geladen werden. Bitte erneut versuchen.','error');
+      setApiInfo('Bereits geladene Flurstücke bleiben verfügbar.');
+    }finally{if(inFlight===controller)inFlight=null;hydrateVisibleSelection()}
+  }
+ async function hydrateVisibleSelection(){
+   if(!mapReady||hydrationPending||!displayParcels||regionMode==='outside'||map.getZoom()<config.minZoom)return;
+   const b=bboxView();if(!b)return;
+   const missing=[...selection].filter(([id,item])=>{
+     if(features.has(id)||hydrations.has(id))return false;
+     const p=item.anchor||item.center;return p&&p[0]>=b[0]&&p[0]<=b[2]&&p[1]>=b[1]&&p[1]<=b[3];
+   }).slice(0,6);
+   if(!missing.length)return;
+   hydrationPending=true;
+   for(const [id,item] of missing){
+     if(features.has(id))continue;
+     const [lon,lat]=item.anchor||item.center,padLat=15/111320,padLon=15/(111320*Math.max(.3,Math.cos(lat*Math.PI/180)));
+     const url=buildParcelURL([lon-padLon,lat-padLat,lon+padLon,lat+padLat].map(x=>Number(x.toFixed(7))));
+     try{const data=await geojson(url);requestCount++;ingest(data.features);}
+     catch{ /* Die Auswahl bleibt auch bei einem fehlgeschlagenen Detailabruf erhalten. */ }
+     hydrations.add(id);
+   }
+   hydrationPending=false;
+   const remaining=[...selection].some(([id,v])=>!features.has(id)&&!hydrations.has(id)&&v.anchor);
+   if(remaining)setTimeout(hydrateVisibleSelection,500);
+ }
+ async function searchPlaces(query){const box=$('place-results');box.replaceChildren(el('div','Ort wird gesucht …','tiny'));try{const u=new URL('https://photon.komoot.io/api/');u.searchParams.set('q',query);u.searchParams.set('limit','6');u.searchParams.set('lang','de');u.searchParams.set('bbox','5.9,48.7,8.85,51.1');const r=await fetch(u,{credentials:'omit'});if(!r.ok)throw Error(`HTTP ${r.status}`);const json=await r.json();box.replaceChildren();placeResults=(json.features||[]).filter(f=>Array.isArray(f.geometry?.coordinates));if(!placeResults.length){box.append(el('p','Keine Orte gefunden. Versuche eine genauere Adresse.','tiny'));return}
+ for(const f of placeResults){const p=f.properties||{},name=[p.name,p.street,p.housenumber,p.city,p.state].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i).join(', '),btn=el('button',name||'Ort anzeigen','btn');btn.type='button';btn.style.textAlign='left';btn.style.whiteSpace='normal';btn.addEventListener('click',()=>{map.flyTo({center:f.geometry.coordinates,zoom:17.2,duration:850});box.replaceChildren();});box.append(btn)}
+ }catch(e){box.replaceChildren(el('div',`Ortssuche nicht erreichbar: ${e.message}`,'tiny'));}}
+ function parcelMatch(f,gem,flur,zae,nen){const p=f.properties||{};const remoteFlur=String(p.flur??'').replace(/[^0-9]/g,'')||String(p.flurschl??'').slice(-3).replace(/^0+/,'')||'0';return norm(p.gemarkung)===norm(gem)&&String(Number(p.flstnrzae))===String(Number(zae))&&(!nen||String(Number(p.flstnrnen))===String(Number(nen)))&&(flur===''||Number(remoteFlur)===Number(flur));}
+ async function searchParcel(gem,flur,zae,nen){const box=$('parcel-results');box.replaceChildren(el('div','Suche in bereits geladenen und amtlichen Daten …','tiny'));let matches=[...features.values()].filter(f=>parcelMatch(f,gem,flur,zae,nen));
+ if(!matches.length){const u=areaAdapter.queryParcel(gem,flur,zae,nen);try{const data=await geojson(u);requestCount++;matches=data.features.filter(f=>parcelMatch(f,gem,flur,zae,nen));ingest(matches);if(!matches.length&&data.features?.length){box.replaceChildren(el('div','Kein eindeutiger Treffer gefunden. Bitte Gemarkung und Flurstücksnummer prüfen.','tiny'));return}}
+ catch(e){box.replaceChildren(el('div',`Flurstückssuche derzeit nicht erreichbar. Bitte später erneut versuchen.`,'tiny'));return}}
+ box.replaceChildren();if(!matches.length){box.append(el('div','Kein Treffer für diese Kombination.','tiny'));return}
+ for(const f of matches.slice(0,30)){const pt=featureCenter(f);if(pt&&regionAt(pt)==='outside')continue;const k=key(f);if(!validId(k))continue;const wrap=el('div',undefined,'search-result'),txt=el('div',undefined,'text'),title=el('strong',desc(f)),detail=el('small',`Amtliches Kennzeichen: ${k}`),zoom=el('button','Karte','btn'),pick=el('button',selection.has(k)?'Abwählen':'Markieren','btn primary');txt.append(title,detail);zoom.addEventListener('click',()=>{const box=geoBounds(f.geometry);map.fitBounds([[box[0],box[1]],[box[2],box[3]]],{padding:80,maxZoom:19.5});});pick.addEventListener('click',()=>{toggle(k,f);pick.textContent=selection.has(k)?'Abwählen':'Markieren'});wrap.append(txt,zoom,pick);box.append(wrap)}
+ }
+ $('place-form').addEventListener('submit',e=>{e.preventDefault();const q=$('place-input').value.trim();if(q.length>=3)searchPlaces(q);});
+ $('parcel-form').addEventListener('submit',e=>{e.preventDefault();const gem=$('gemarkung').value.trim(),no=$('nummer').value.trim(),m=no.match(/^(\d+)(?:\/(\d+))?$/);if(gem&&!m){$('parcel-results').textContent='Nummer als Zähler oder Zähler/Nenner eingeben.';return}if(!m)return;searchParcel(gem,$('flur').value,m[1],m[2]||'')});
+ $('detail-note').addEventListener('input',e=>{const it=selection.get(selectedDetail);if(it){it.note=e.target.value;persist()}});
+ $('detail-note').addEventListener('change',()=>renderSelected());
+ $('close-detail').addEventListener('click',()=>{selectedDetail=null;renderDetail()});
+ $('deselect-detail').addEventListener('click',()=>{if(selectedDetail)toggle(selectedDetail)});
+ $('clear').addEventListener('click',()=>{if(!selection.size||!confirm('Alle markierten Flurstücke und ihre Notizen entfernen?'))return;selection.clear();selectedDetail=null;renderSelected();updateData();persist()});
+ async function snapshotForPrint(){
+   if(!mapReady){message('Karte wird noch geladen. Bitte erneut versuchen.','error');return}
+   map.stop();updateData();map.triggerRepaint();
+   await Promise.race([new Promise(resolve=>map.once('render',resolve)),new Promise(resolve=>setTimeout(resolve,700))]);
+   try{
+     const canvas=map.getCanvas(),png=canvas.toDataURL('image/png');
+     if(!png.startsWith('data:image/png')||png.length<100)throw Error('Kartenbild nicht verfügbar');
+     const img=$('print-image');img.src=png;
+     if(img.decode)await img.decode();
+     const center=map.getCenter();$('print-subtitle').textContent=`Kartenausschnitt: ${center.lat.toFixed(5)}° N, ${center.lng.toFixed(5)}° E · ${new Date().toLocaleDateString('de-DE')}`;
+     $('print-selected').textContent=selection.size?`${selection.size} markierte Flurstücke · ${[...selection.values()].slice(0,18).map(v=>v.name).join(' · ')}${selection.size>18?' …':''}`:'Keine markierten Flurstücke';
+     window.print();
+   }catch(e){message('Die Karte konnte nicht für den Druck vorbereitet werden. Bitte erneut versuchen.','error');console.warn(e)}
+ }
+ $('print').addEventListener('click',snapshotForPrint);
+ $('share').addEventListener('click',async()=>{
+   clearTimeout(saveTimer);persistNow();
+   const url=location.href;
+   try{if(navigator.clipboard?.writeText)await navigator.clipboard.writeText(url);else{const ta=el('textarea');ta.value=url;ta.style.position='absolute';ta.style.left='-10000px';document.body.append(ta);ta.select();if(!document.execCommand('copy'))throw Error('Kopieren nicht möglich');ta.remove()}
+     $('share').textContent='Link kopiert ✓';setTimeout(()=>$('share').textContent='Link kopieren',1800);
+   }catch{message('Kopieren nicht möglich. Bitte den Link aus der Adressleiste kopieren.','error')}
+ });
+ $('base-light').addEventListener('click',()=>{satellite=false;updateVisibility();persist()});$('base-photo').addEventListener('click',()=>{satellite=true;lastPhotoError=false;updateVisibility();persist()});
+ $('show-parcels').addEventListener('change',e=>{displayParcels=e.target.checked;updateVisibility();if(displayParcels){scheduledLoad()}else{if(inFlight)inFlight.abort();message('Flurstücke ausgeblendet.')}persist()});
+ $('show-numbers').addEventListener('change',e=>{displayNumbers=e.target.checked;updateVisibility();persist()});$('reload').addEventListener('click',()=>loadViewport(true));
+ $('show-wms').addEventListener('change',e=>{fallbackEnabled=e.target.checked;updateVisibility();});
+ window.addEventListener('popstate',()=>{restoring=true;const u=new URL(location.href),s=u.searchParams.get('s');if(s){try{validateState(decode(s))}catch{}}else selection.clear();const lat=Number(u.searchParams.get('lat')),lon=Number(u.searchParams.get('lon')),z=Number(u.searchParams.get('z'));if(Number.isFinite(lat)&&Number.isFinite(lon)&&Number.isFinite(z)&&lat>=48.5&&lat<=51.3&&lon>=5.8&&lon<=8.9)map.jumpTo({center:[lon,lat],zoom:Math.max(6,Math.min(21,z))});satellite=u.searchParams.get('bg')==='photo';restoring=false;renderSelected();updateData();updateVisibility();scheduledLoad()});
+ map.on('load',()=>{mapReady=true;readyLayers();renderSelected();updateData();syncRegion();loadStateBoundary();scheduledLoad()});
+ map.on('moveend',()=>{if(!mapReady)return;updateData();syncRegion();scheduledLoad();persist()});
+ renderSelected();
+})();
+</script>
+</body>
+</html>
